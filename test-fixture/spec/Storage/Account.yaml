@@ -1,0 +1,48 @@
+imports:
+  Merchant: crate::domain::types::merchant
+
+Account:
+  tableName: account
+  derives: "Debug, Clone, Serialize, Deserialize"
+
+  types:
+    AccountType:
+      enum: "Asset, Liability, Revenue, Expense"
+
+    AccountStatus:
+      enum: "Active, Suspended, Closed"
+
+  fields:
+    id: Id<Account>
+    accountType: AccountType
+    balance: f64
+    status: AccountStatus
+    description: Option<String>
+    merchantId: Id<Merchant>
+
+  constraints:
+    id: PrimaryKey
+
+  queries:
+    findById:
+      kvFunction: findOne
+      where: id
+
+    findByMerchantAndType:
+      kvFunction: findAll
+      where:
+        and: [merchantId, accountType]
+
+    updateBalance:
+      kvFunction: updateOne
+      params: [balance]
+      where: id
+
+    updateStatus:
+      kvFunction: updateOne
+      params: [status]
+      where: id
+
+    deleteById:
+      kvFunction: delete
+      where: id

@@ -1,0 +1,65 @@
+imports:
+  Merchant: crate::domain::types::merchant
+  MerchantOperatingCity: crate::domain::types::merchant_operating_city
+  SeatLayout: crate::domain::types::seat_layout
+
+Seat:
+  tableName: seat
+  derives: "Debug, Clone, Serialize, Deserialize, PartialEq"
+
+  fields:
+    id: Id<Seat>
+    seatLabel: String
+    rowNo: i32
+    colNo: i32
+    seatType: Option<SeatType>
+    isBookable: bool
+    isLadiesOnly: Option<bool>
+    seatLayoutId: Id<SeatLayout>
+    merchantId: Id<Merchant>
+    merchantOperatingCityId: Id<MerchantOperatingCity>
+    directionDegrees: Option<i32>
+    minStopsRequired: Option<i32>
+
+  default:
+    directionDegrees: "0"
+
+  types:
+    SeatType:
+      enum: "Window, Aisle, Middle, SleeperLower, SleeperUpper, MountArea"
+
+  constraints:
+    id: PrimaryKey
+    seatLayoutId: SecondaryKey
+
+  queries:
+    findById:
+      kvFunction: findOne
+      where: id
+    findAllByLayoutId:
+      kvFunction: findAll
+      where: seatLayoutId
+    findAllByIds:
+      kvFunction: findAll
+      where:
+        in: [id]
+
+SeatLayout:
+  tableName: seat_layout
+  derives: "Debug, Clone, Serialize, Deserialize, PartialEq"
+
+  fields:
+    id: Id<SeatLayout>
+    name: String
+    rows: i32
+    columns: i32
+    merchantId: Id<Merchant>
+    merchantOperatingCityId: Id<MerchantOperatingCity>
+
+  constraints:
+    id: PrimaryKey
+
+  queries:
+    findById:
+      kvFunction: findOne
+      where: id

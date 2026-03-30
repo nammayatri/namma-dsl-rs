@@ -1,0 +1,3 @@
+/target
+test-fixture/src-read-only/
+*.DS_Store

@@ -1,0 +1,53 @@
+[output]
+domain_type = "test-fixture/src-read-only/domain/types"
+diesel_schema = "test-fixture/src-read-only/storage/schema"
+diesel_model = "test-fixture/src-read-only/storage/models"
+queries = "test-fixture/src-read-only/storage/queries"
+
+[[output.sql]]
+path = "test-fixture/src-read-only/migrations"
+database = "atlas_app"
+
+[storage]
+extra_default_fields = [
+    { name = "createdAt", rust_type = "chrono::DateTime<chrono::Utc>" },
+    { name = "updatedAt", rust_type = "chrono::DateTime<chrono::Utc>" },
+]
+
+[generate]
+generators = ["DomainType", "DieselSchema", "DieselModel", "Queries", "SQL"]
+
+[[type_mapping]]
+rust = "String"
+sql = "text"
+diesel = "Text"
+
+[[type_mapping]]
+rust = "i32"
+sql = "integer"
+diesel = "Integer"
+
+[[type_mapping]]
+rust = "i64"
+sql = "bigint"
+diesel = "BigInt"
+
+[[type_mapping]]
+rust = "f64"
+sql = "double precision"
+diesel = "Double"
+
+[[type_mapping]]
+rust = "bool"
+sql = "boolean"
+diesel = "Bool"
+
+[[type_mapping]]
+rust = "Id"
+sql = "character varying(36)"
+diesel = "Varchar"
+
+[[type_mapping]]
+rust = "chrono::DateTime<chrono::Utc>"
+sql = "timestamp with time zone"
+diesel = "Timestamptz"
