@@ -1,3 +1,32 @@
 /target
 test-fixture/src-read-only/
 *.DS_Store
+
+# Nix
+/result
+/result-*
+/.direnv/
+
+# Secrets and credentials
+.env
+.env.*
+*.pem
+*.key
+*.p12
+*.pfx
+*.crt
+*.cer
+*.kdbx
+credentials
+credentials.*
+.envrc.local
+id_rsa
+id_rsa.*
+id_dsa
+id_dsa.*
+id_ecdsa
+id_ecdsa.*
+id_ed25519
+id_ed25519.*
+*.gpg
+secrets/

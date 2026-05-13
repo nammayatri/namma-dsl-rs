@@ -49,7 +49,9 @@ pub enum WhereClause {
 #[derive(Debug, Clone, PartialEq)]
 pub enum KvFunction {
     FindOne,
+    FindOnePartial,
     FindAll,
+    FindAllPartial,
     Update,
     UpdateOne,
     Delete,

@@ -271,7 +271,9 @@ fn parse_queries(model: &serde_yaml::Mapping) -> Result<Vec<QueryDef>> {
                 let kv_fn_str = get_str(qdef, "kvFunction").unwrap_or_default();
                 let kv_function = match kv_fn_str.as_str() {
                     "findOneWithKV" | "findOne" => KvFunction::FindOne,
+                    "findOnePartialWithKV" | "findOnePartial" => KvFunction::FindOnePartial,
                     "findAllWithKV" | "findAllWithOptionsKV" | "findAll" => KvFunction::FindAll,
+                    "findAllPartialWithKV" | "findAllPartial" => KvFunction::FindAllPartial,
                     "updateWithKV" | "update" | "updateManyWithKV" => KvFunction::Update,
                     "updateOneWithKV" | "updateOne" => KvFunction::UpdateOne,
                     "deleteWithKV" | "delete" => KvFunction::Delete,

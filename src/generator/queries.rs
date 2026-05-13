@@ -289,6 +289,16 @@ fn generate_spec_query(out: &mut String, q: &QueryDef, table: &TableDef, enum_na
             writeln!(out, "}}").unwrap();
             writeln!(out).unwrap();
         }
+        KvFunction::FindOnePartial => {
+            let params = where_clause_params(&q.where_clause, table);
+            let params_str = if params.is_empty() {
+                String::new()
+            } else {
+                format!(", {}", params.join(", "))
+            };
+
+            
+        }
         KvFunction::FindAll => {
             let params = where_clause_params(&q.where_clause, table);
             let params_str = if params.is_empty() {
@@ -328,6 +338,9 @@ fn generate_spec_query(out: &mut String, q: &QueryDef, table: &TableDef, enum_na
             .unwrap();
             writeln!(out, "}}").unwrap();
             writeln!(out).unwrap();
+        }
+        KvFunction::FindAllPartial => {
+
         }
         KvFunction::Update | KvFunction::UpdateOne => {
             let where_params = where_clause_params(&q.where_clause, table);
