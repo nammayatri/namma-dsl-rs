@@ -1,6 +1,9 @@
 /target
+test-fixture/target/
+test-fixture/Cargo.lock
 test-fixture/src-read-only/
 *.DS_Store
+.claude/
 
 # Nix
 /result

@@ -14,6 +14,8 @@ pub struct TableDef {
     pub derives: Vec<String>,
     pub defaults: HashMap<String, String>,
     pub extra_indexes: Vec<IndexDef>,
+    pub kv_disabled: bool, // opt out of KV semantics; emit raw diesel-async
+    pub ttl_secs: Option<u64>, // per-table Redis TTL override
 }
 
 #[derive(Debug, Clone)]

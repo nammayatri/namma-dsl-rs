@@ -26,6 +26,7 @@ pub fn generate_domain_type(table: &TableDef) -> String {
         }
         collect_type_imports(&f.rust_type, &table.imports, &mut needed_imports);
     }
+    needed_imports.remove(&table.table_name_rust); // never self-import
 
     if needs_serde {
         writeln!(out, "use serde::{{Deserialize, Serialize}};").unwrap();

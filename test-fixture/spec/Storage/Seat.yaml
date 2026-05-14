@@ -52,7 +52,7 @@ SeatLayout:
     id: Id<SeatLayout>
     name: String
     rows: i32
-    columns: i32
+    column_count: i32
     merchantId: Id<Merchant>
     merchantOperatingCityId: Id<MerchantOperatingCity>
 

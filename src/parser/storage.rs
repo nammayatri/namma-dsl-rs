@@ -118,6 +118,15 @@ fn parse_single_model(
 
     let queries = parse_queries(model)?;
 
+    let kv_disabled = model
+        .get(&serde_yaml::Value::String("kvDisabled".to_string()))
+        .and_then(|v| v.as_bool())
+        .unwrap_or(false);
+
+    let ttl_secs = model
+        .get(&serde_yaml::Value::String("ttl".to_string()))
+        .and_then(|v| v.as_u64());
+
     Ok(TableDef {
         table_name_rust: model_name.to_string(),
         table_name_sql,
@@ -130,6 +139,8 @@ fn parse_single_model(
         derives,
         defaults,
         extra_indexes,
+        kv_disabled,
+        ttl_secs,
     })
 }
 
